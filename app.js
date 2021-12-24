@@ -31,6 +31,16 @@ app.get('/', (req, res) => {
 	res.render('home.twig', {
 		name: 'Developer'
 	});
+})
+.get('/about', (req, res) => {
+	res.render('about.twig', {
+		name: 'Developer'
+	});
+})
+.get('/contact', (req, res) => {
+	res.render('contact.twig', {
+		name: 'Developer'
+	});
 });
 
 http.listen(process.env.PORT || 8080);
