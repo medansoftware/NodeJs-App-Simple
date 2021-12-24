@@ -7,6 +7,7 @@ global.ViewEngine = require(__dirname+'/view-engine');
 
 app.set('views', __dirname+'/views');
 app.set('view engine', 'twig');
+app.use(express.static(__dirname+'/public'));
 app.use(cors({ origin : (origin, callback) => { callback(null, true) }, credentials: true }));
 app.use((req, res, next) => {
 	res.render = (file, options = {}) => {
