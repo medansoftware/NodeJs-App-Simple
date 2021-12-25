@@ -24,8 +24,37 @@
 		{% block content %}{% endblock %}
 		{% include 'components/footer.twig' %}
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+		$('#send-push').on('submit', (e) => {
+			e.preventDefault();
+			$.ajax({
+				url: '/',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					vapid: {
+						public: $('input[name="public_key"]').val(),
+						private: $('input[name="private_key"]').val()
+					},
+					subscription: $('textarea[name="subscription"]').val(),
+					notification: {
+						title: $('input[name="notification_title"]').val(),
+						option: {
+							body: $('input[name="notification_body"]').val()
+						}
+					}
+
+				},
+				success: (data) => {
+					console.log(data);
+				},
+				error: (error) => {
+					console.log(error);
+				}
+			});
+
+		});
+		</script>
 		<script src="/assets/bootstrap/v3/dist/js/bootstrap.min.js"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>
