@@ -40,7 +40,11 @@
 					notification: {
 						title: $('input[name="notification_title"]').val(),
 						options: {
-							body: $('input[name="notification_body"]').val()
+							body: $('input[name="notification_body"]').val(),
+							data: {
+								campaign_id: 1,
+								open_url: 'https://github.com/medansoftware'
+							}
 						}
 					}
 
