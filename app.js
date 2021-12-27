@@ -24,6 +24,11 @@ app.use((req, res, next) => {
 		Object.assign(options, res.locals); // merge option variable to local variable
 		const Twig = new ViewEngine.Twig(__dirname+'/views'); // assign template paths
 
+		Twig.addFunction('json_encode', (object) => {
+			console.log(object)
+			return Promise.resolve(JSON.stringify(object));
+		});
+
 		// render with twig
 		Twig.render(file, options, (error, output) => {
 			if (error) {
@@ -90,7 +95,7 @@ const faker = require('faker');
 moment.tz.setDefault(process.env.TIMEZONE || 'Asia/Jakarta');
 faker.locale = 'id_ID';
 
-for (i = 0; i < 10; i++)  {
+for (i = 0; i < 100; i++)  {
 
 	var gender = array_random(['male', 'female']);
 	data[i] = new Object;
@@ -102,17 +107,17 @@ for (i = 0; i < 10; i++)  {
 
 	var section = array_random(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']);
 
-	data[i]['laporan'] = ['LP/'+(num)+'/'+section+'/RES.'+random_integer(1, 4)+'.'+random_integer(1, 40)+'/2021'];
-	data[i]['tersangka'] = [faker.name.firstName(gender)+' '+faker.name.lastName(gender)];
-	data[i]['korban'] = [faker.name.firstName(gender)+' '+faker.name.lastName(gender)];
-	data[i]['tkp'] = [faker.address.streetAddress(true)];
+	data[i]['laporan'] = 'LP/'+(num)+'/'+section+'/RES.'+random_integer(1, 4)+'.'+random_integer(1, 40)+'/2021';
+	data[i]['tersangka'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
+	data[i]['korban'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
+	data[i]['tkp'] = faker.address.streetAddress(true);
 }
 
 console.log(data)
 
 app.get('/', (req, res) => {
 	res.render('home.twig', {
-		name: 'Developer'
+		laporan: data
 	});
 })
 .get('/about', (req, res) => {

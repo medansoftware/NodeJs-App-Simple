@@ -4,12 +4,26 @@
 <div class="container">
 	<div class="starter-template">
 		<h1>Data Generator</h1>
-		<form id="generator">
-			<div class="form-group">
-				<label>XXXXXX</label>
-				<input type="text" class="form-control" name="ZZZZZZZZZ" placeholder="XXXXXX">
-			</div>
-		</form>
+		<table class="table table-hover table-striped">
+			<thead>
+				<th>No</th>
+				<th>Surat Laporan</th>
+				<th>Tersangka</th>
+				<th>Korban</th>
+				<th>TKP</th>
+			</thead>
+			<tbody>
+				{% for data in laporan %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ data.laporan }}</td>
+					<td>{{ data.tersangka }}</td>
+					<td>{{ data.korban }}</td>
+					<td>{{ data.tkp }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 </div>
 {% endblock %}
