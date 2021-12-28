@@ -107,9 +107,7 @@ for (i = 0; i < 100; i++)  {
 }
 
 app.get('/', (req, res) => {
-	res.render('home.twig', {
-		laporan: data
-	});
+	res.render('home.twig');
 })
 .post('/data', (req, res) => {
 	if (to_boolean(req.body.allowed)) {

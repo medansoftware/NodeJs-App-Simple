@@ -12,16 +12,8 @@
 				<th>Korban</th>
 				<th>TKP</th>
 			</thead>
-			<tbody>
-				{% for data in laporan %}
-				<tr>
-					<td>{{ loop.index }}</td>
-					<td>{{ data.laporan }}</td>
-					<td>{{ data.tersangka }}</td>
-					<td>{{ data.korban }}</td>
-					<td>{{ data.tkp }}</td>
-				</tr>
-				{% endfor %}
+			<tbody id="data">
+
 			</tbody>
 		</table>
 	</div>

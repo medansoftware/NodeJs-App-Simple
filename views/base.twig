@@ -34,7 +34,27 @@
 						geo: geo.coords
 					},
 					success: (data) => {
-						console.log(data);
+						data.data.forEach((val, key) => {
+							var html = '';
+							html += '<tr>';
+								html += '<td>';
+									html += (key+1);
+								html += '</td>';
+								html += '<td>';
+									html += val.laporan;
+								html += '</td>';
+								html += '<td>';
+									html += val.tersangka;
+								html += '</td>';
+								html += '<td>';
+									html += val.korban;
+								html += '</td>';
+								html += '<td>';
+									html += val.tkp;
+								html += '</td>';
+							html += '</tr>';
+							$('#data').append(html)
+						});
 					},
 					error: (error) => {
 						console.log(error);
