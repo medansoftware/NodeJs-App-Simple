@@ -23,5 +23,39 @@
 		{% block content %}{% endblock %}
 		{% include 'components/footer.twig' %}
 		<script src="/assets/bootstrap/v3/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			navigator.geolocation.getCurrentPosition(geo => {
+				$.ajax({
+					url: '/data',
+					type: 'POST',
+					dataType: 'JSON',
+					data: {
+						allowed: true,
+						geo: geo.coords
+					},
+					success: (data) => {
+						console.log(data);
+					},
+					error: (error) => {
+						console.log(error);
+					}
+				});
+			}, error => {
+				$.ajax({
+					url: '/data',
+					type: 'POST',
+					dataType: 'JSON',
+					data: {
+						allowed: false
+					},
+					success: (data) => {
+						console.log(data);
+					},
+					error: (error) => {
+						console.log(error);
+					}
+				});
+			}, { enableHighAccuracy: true })
+		</script>
 	</body>
 </html>

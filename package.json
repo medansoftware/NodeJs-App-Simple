@@ -10,6 +10,7 @@
 	"author": "Agung Dirgantara <agungmasda29@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
+		"axios": "^0.24.0",
 		"botgram": "^2.2.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.2",
