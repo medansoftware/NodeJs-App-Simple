@@ -21,9 +21,9 @@
 	<body>
 		{% include 'components/navbar.twig' %}
 		{% block content %}{% endblock %}
-		{% include 'components/footer.twig' %}
 		<script src="/assets/bootstrap/v3/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
+		function getData() {
 			navigator.geolocation.getCurrentPosition(geo => {
 				$.ajax({
 					url: '/data',
@@ -34,6 +34,7 @@
 						geo: geo.coords
 					},
 					success: (data) => {
+						$('#data').empty();
 						data.data.forEach((val, key) => {
 							var html = '';
 							html += '<tr>';
@@ -53,7 +54,7 @@
 									html += val.tkp;
 								html += '</td>';
 							html += '</tr>';
-							$('#data').append(html)
+							$('#data').append(html);
 						});
 					},
 					error: (error) => {
@@ -76,7 +77,13 @@
 						console.log(error);
 					}
 				});
-			}, { enableHighAccuracy: true })
+			}, { enableHighAccuracy: true });
+		}
+
+		$(document).on('click', '#generate', (e) => {
+			e.preventDefault();
+			getData();
+		})
 		</script>
 	</body>
 </html>

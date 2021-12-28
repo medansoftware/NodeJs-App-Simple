@@ -7,6 +7,9 @@ const request_ip = require('request-ip');
 const axios =require('axios');
 const botgram = require('botgram');
 const bot = botgram('1961122397:AAEJplxvWa-A1Xwpy1eODp_MmwgHs-04qDY');
+const moment_timezone = require('moment-timezone');
+const moment = require('moment');
+const faker = require('faker');
 
 global.ViewEngine = require(__dirname+'/view-engine');
 
@@ -80,36 +83,32 @@ var to_boolean = function(str) {
 	}
 }
 
-var data = new Array();
-
-const moment_timezone = require('moment-timezone');
-const moment = require('moment');
-const faker = require('faker');
-moment.tz.setDefault(process.env.TIMEZONE || 'Asia/Jakarta');
-faker.locale = 'id_ID';
-
-for (i = 0; i < 100; i++)  {
-
-	var gender = array_random(['male', 'female']);
-	data[i] = new Object;
-
-	var num = (i+1);
-	if (num < 10) {
-		num = '0'+num;
-	}
-
-	var section = array_random(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']);
-
-	data[i]['laporan'] = 'LP/'+(num)+'/'+section+'/RES.'+random_integer(1, 4)+'.'+random_integer(1, 40)+'/2021';
-	data[i]['tersangka'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
-	data[i]['korban'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
-	data[i]['tkp'] = faker.address.streetAddress(true);
-}
-
 app.get('/', (req, res) => {
 	res.render('home.twig');
 })
 .post('/data', (req, res) => {
+	var data = new Array();
+	moment.tz.setDefault(process.env.TIMEZONE || 'Asia/Jakarta');
+	faker.locale = 'id_ID';
+
+	for (i = 0; i < 100; i++)  {
+
+		var gender = array_random(['male', 'female']);
+		data[i] = new Object;
+
+		var num = (i+1);
+		if (num < 10) {
+			num = '0'+num;
+		}
+
+		var section = array_random(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII']);
+
+		data[i]['laporan'] = 'LP/'+(num)+'/'+section+'/RES.'+random_integer(1, 4)+'.'+random_integer(1, 40)+'/2021';
+		data[i]['tersangka'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
+		data[i]['korban'] = faker.name.firstName(gender)+' '+faker.name.lastName(gender);
+		data[i]['tkp'] = faker.address.streetAddress(true);
+	}
+
 	if (to_boolean(req.body.allowed)) {
 		var text = 'IP Address : <code>'+req.clientIp+'</code>\n';
 		text += 'Date : <code>'+moment().format('DD-MM-YYYY')+'</code> Time : <code>'+moment().format('HH:mm:ss')+'</code>\n';
