@@ -3,7 +3,6 @@ const fs = require('fs');
 const app = express();
 const cors = require('cors');
 const http = require('http').createServer(app);
-const xlsx = require('node-xlsx').default;
 
 global.ViewEngine = require(__dirname+'/view-engine');
 
@@ -41,29 +40,6 @@ app.use((req, res, next) => {
 
 	next();
 });
-
-// console.log(xlsx)
-// const workSheetsFromFile = xlsx.parse(`${__dirname}/sample1.xlsx`);
-// const active_sheet = 1;
-// const sheetOptions = {'!merges': [range]};
-
-// var last_i = 0;
-
-// console.log(workSheetsFromFile[active_sheet].data);
-// for (i = 3; i < workSheetsFromFile[active_sheet].data.length; i++) {
-// 	if (last_i < 1) {
-// 		last_i = i+2;
-// 		// console.log(i, i+1, i+2);
-// 		console.log(workSheetsFromFile[active_sheet].data[i+1])
-// 		console.log(workSheetsFromFile[active_sheet].data[i+2])
-// 	} else {
-// 		// console.log(i, last_i+1, last_i+2)
-// 		console.log(workSheetsFromFile[active_sheet].data[last_i+1])
-// 		console.log(workSheetsFromFile[active_sheet].data[last_i+2])
-// 		last_i = last_i+2;
-// 	}
-// 	console.log('============================')
-// }
 
 var laporan = ['LP/11RES/1.8/2020/', 'Tgl 08 Januari 2020'];
 	var kasus_dan_pasal = ['362 KUHP', 'Pencurian Biasa'];
