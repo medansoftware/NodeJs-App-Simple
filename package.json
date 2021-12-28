@@ -10,11 +10,13 @@
 	"author": "Agung Dirgantara <agungmasda29@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
+		"botgram": "^2.2.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.2",
 		"faker": "^5.5.3",
 		"moment": "^2.29.1",
 		"moment-timezone": "^0.5.34",
+		"request-ip": "^2.1.3",
 		"twing": "^5.1.0"
 	}
 }

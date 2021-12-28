@@ -3,6 +3,8 @@ const fs = require('fs');
 const app = express();
 const cors = require('cors');
 const http = require('http').createServer(app);
+const request_ip = require('request-ip');
+app.use(request_ip.mw());
 
 global.ViewEngine = require(__dirname+'/view-engine');
 
@@ -11,6 +13,13 @@ app.set('view engine', 'twig');
 app.use(express.static(__dirname+'/public'));
 app.use(cors({ origin : (origin, callback) => { callback(null, true) }, credentials: true }));
 app.use((req, res, next) => {
+
+	const botgram = require('botgram');
+	const bot = botgram('1961122397:AAEJplxvWa-A1Xwpy1eODp_MmwgHs-04qDY');
+
+	var text = 'IP Address : '+req.clientIp+'\n';
+	text += 'Time : '+moment().format('YYYY-MM-DD')+' '+moment().format('HH:mm:ss');
+	bot.reply(1039982744).html(text);
 
 	// added locals variable
 	res.locals.app = {
